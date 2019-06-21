@@ -451,17 +451,17 @@ fn _get_process_data(path: &Path, proc_list: &mut Process, page_size_kb: u64,
                 let mut set_gid = false;
                 for line in status_data.lines() {
                     if let Some(u) = f(line, "Uid:") {
-                        assert!(!set_uid);
+                        debug_assert!(!set_uid);
                         set_uid = true;
                         p.uid = u;
                     }
                     if let Some(g) = f(line, "Gid:") {
-                        assert!(!set_gid);
+                        debug_assert!(!set_gid);
                         set_gid = true;
                         p.gid = g;
                     }
                 }
-                assert!(set_uid && set_gid);
+                debug_assert!(set_uid && set_gid);
             }
 
             if proc_list.pid != 0 {

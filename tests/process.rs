@@ -12,9 +12,9 @@ fn test_process() {
 
     let mut s = sysinfo::System::new();
     s.refresh_processes();
-    assert!(s.get_process_list().len() != 0);
+    debug_assert!(s.get_process_list().len() != 0);
     #[cfg(not(windows))]
-    assert!(s.get_process_list()
+    debug_assert!(s.get_process_list()
              .values()
              .any(|p| p.exe().to_str().unwrap_or_else(|| "").len() != 0));
 }

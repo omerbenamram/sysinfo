@@ -28,14 +28,14 @@ pub extern "C" fn sysinfo_init() -> CSystem {
 /// Equivalent of `System::drop`. Important in C to cleanup memory.
 #[no_mangle]
 pub extern "C" fn sysinfo_destroy(system: CSystem) {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     unsafe { Box::from_raw(system as *mut System); }
 }
 
 /// Equivalent of `System.refresh_system()`.
 #[no_mangle]
 pub extern "C" fn sysinfo_refresh_system(system: CSystem) {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let mut system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     {
         let system: &mut System = system.borrow_mut();
@@ -47,7 +47,7 @@ pub extern "C" fn sysinfo_refresh_system(system: CSystem) {
 /// Equivalent of `System.refresh_all()`.
 #[no_mangle]
 pub extern "C" fn sysinfo_refresh_all(system: CSystem) {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let mut system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     {
         let system: &mut System = system.borrow_mut();
@@ -59,7 +59,7 @@ pub extern "C" fn sysinfo_refresh_all(system: CSystem) {
 /// Equivalent of `System.refresh_processes()`.
 #[no_mangle]
 pub extern "C" fn sysinfo_refresh_processes(system: CSystem) {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let mut system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     {
         let system: &mut System = system.borrow_mut();
@@ -72,7 +72,7 @@ pub extern "C" fn sysinfo_refresh_processes(system: CSystem) {
 #[cfg(target_os = "linux")]
 #[no_mangle]
 pub extern "C" fn sysinfo_refresh_process(system: CSystem, pid: pid_t) {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let mut system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     {
         let system: &mut System = system.borrow_mut();
@@ -84,7 +84,7 @@ pub extern "C" fn sysinfo_refresh_process(system: CSystem, pid: pid_t) {
 /// Equivalent of `System.refresh_disks()`.
 #[no_mangle]
 pub extern "C" fn sysinfo_refresh_disks(system: CSystem) {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let mut system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     {
         let system: &mut System = system.borrow_mut();
@@ -96,7 +96,7 @@ pub extern "C" fn sysinfo_refresh_disks(system: CSystem) {
 /// Equivalent of `System.refresh_disk_list()`.
 #[no_mangle]
 pub extern "C" fn sysinfo_refresh_disk_list(system: CSystem) {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let mut system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     {
         let system: &mut System = system.borrow_mut();
@@ -108,7 +108,7 @@ pub extern "C" fn sysinfo_refresh_disk_list(system: CSystem) {
 /// Equivalent of `System.get_total_memory()`.
 #[no_mangle]
 pub extern "C" fn sysinfo_get_total_memory(system: CSystem) -> size_t {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     let ret = system.get_total_memory() as size_t;
     Box::into_raw(system);
@@ -118,7 +118,7 @@ pub extern "C" fn sysinfo_get_total_memory(system: CSystem) -> size_t {
 /// Equivalent of `System.get_free_memory()`.
 #[no_mangle]
 pub extern "C" fn sysinfo_get_free_memory(system: CSystem) -> size_t {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     let ret = system.get_free_memory() as size_t;
     Box::into_raw(system);
@@ -128,7 +128,7 @@ pub extern "C" fn sysinfo_get_free_memory(system: CSystem) -> size_t {
 /// Equivalent of `System.get_used_memory()`.
 #[no_mangle]
 pub extern "C" fn sysinfo_get_used_memory(system: CSystem) -> size_t {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     let ret = system.get_used_memory() as size_t;
     Box::into_raw(system);
@@ -138,7 +138,7 @@ pub extern "C" fn sysinfo_get_used_memory(system: CSystem) -> size_t {
 /// Equivalent of `System.get_total_swap()`.
 #[no_mangle]
 pub extern "C" fn sysinfo_get_total_swap(system: CSystem) -> size_t {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     let ret = system.get_total_swap() as size_t;
     Box::into_raw(system);
@@ -148,7 +148,7 @@ pub extern "C" fn sysinfo_get_total_swap(system: CSystem) -> size_t {
 /// Equivalent of `System.get_free_swap()`.
 #[no_mangle]
 pub extern "C" fn sysinfo_get_free_swap(system: CSystem) -> size_t {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     let ret = system.get_free_swap() as size_t;
     Box::into_raw(system);
@@ -158,7 +158,7 @@ pub extern "C" fn sysinfo_get_free_swap(system: CSystem) -> size_t {
 /// Equivalent of `System.get_used_swap()`.
 #[no_mangle]
 pub extern "C" fn sysinfo_get_used_swap(system: CSystem) -> size_t {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     let ret = system.get_used_swap() as size_t;
     Box::into_raw(system);
@@ -168,7 +168,7 @@ pub extern "C" fn sysinfo_get_used_swap(system: CSystem) -> size_t {
 /// Equivalent of `system.get_network().get_income()`.
 #[no_mangle]
 pub extern "C" fn sysinfo_get_network_income(system: CSystem) -> size_t {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     let ret = system.get_network().get_income() as size_t;
     Box::into_raw(system);
@@ -178,7 +178,7 @@ pub extern "C" fn sysinfo_get_network_income(system: CSystem) -> size_t {
 /// Equivalent of `system.get_network().get_outcome()`.
 #[no_mangle]
 pub extern "C" fn sysinfo_get_network_outcome(system: CSystem) -> size_t {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     let ret = system.get_network().get_outcome() as size_t;
     Box::into_raw(system);
@@ -193,7 +193,7 @@ pub extern "C" fn sysinfo_get_network_outcome(system: CSystem) -> size_t {
 pub extern "C" fn sysinfo_get_processors_usage(system: CSystem,
                                                length: *mut c_uint,
                                                procs: *mut *mut c_float) {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     if procs.is_null() || length.is_null() {
         return;
     }
@@ -222,7 +222,7 @@ pub extern "C" fn sysinfo_get_processors_usage(system: CSystem,
 #[no_mangle]
 pub extern "C" fn sysinfo_get_processes(system: CSystem, fn_pointer: Option<ProcessLoop>,
                                         data: *mut c_void) -> size_t {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     if let Some(fn_pointer) = fn_pointer {
         let system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
         let len = {
@@ -249,7 +249,7 @@ pub extern "C" fn sysinfo_get_processes(system: CSystem, fn_pointer: Option<Proc
 /// refresh method!
 #[no_mangle]
 pub extern "C" fn sysinfo_get_process_by_pid(system: CSystem, pid: pid_t) -> CProcess {
-    assert!(!system.is_null());
+    debug_assert!(!system.is_null());
     let system: Box<System> = unsafe { Box::from_raw(system as *mut System) };
     let ret = if let Some(process) = system.get_process(pid) {
         process as *const Process as CProcess
@@ -269,7 +269,7 @@ pub extern "C" fn sysinfo_get_process_by_pid(system: CSystem, pid: pid_t) -> CPr
 #[no_mangle]
 pub extern "C" fn sysinfo_process_get_tasks(process: CProcess, fn_pointer: Option<ProcessLoop>,
                                             data: *mut c_void) -> size_t {
-    assert!(!process.is_null());
+    debug_assert!(!process.is_null());
     if let Some(fn_pointer) = fn_pointer {
         let process = process as *const Process;
         for (pid, process) in unsafe { (*process).tasks.iter() } {
@@ -286,7 +286,7 @@ pub extern "C" fn sysinfo_process_get_tasks(process: CProcess, fn_pointer: Optio
 /// Equivalent of `Process.pid`.
 #[no_mangle]
 pub extern "C" fn sysinfo_process_get_pid(process: CProcess) -> pid_t {
-    assert!(!process.is_null());
+    debug_assert!(!process.is_null());
     let process = process as *const Process;
     unsafe { (*process).pid() }
 }
@@ -296,7 +296,7 @@ pub extern "C" fn sysinfo_process_get_pid(process: CProcess) -> pid_t {
 /// In case there is no known parent, it returns `0`.
 #[no_mangle]
 pub extern "C" fn sysinfo_process_get_parent_pid(process: CProcess) -> pid_t {
-    assert!(!process.is_null());
+    debug_assert!(!process.is_null());
     let process = process as *const Process;
     unsafe { (*process).parent().unwrap_or_else(|| 0) }
 }
@@ -304,7 +304,7 @@ pub extern "C" fn sysinfo_process_get_parent_pid(process: CProcess) -> pid_t {
 /// Equivalent of `Process.cpu_usage`.
 #[no_mangle]
 pub extern "C" fn sysinfo_process_get_cpu_usage(process: CProcess) -> c_float {
-    assert!(!process.is_null());
+    debug_assert!(!process.is_null());
     let process = process as *const Process;
     unsafe { (*process).cpu_usage() }
 }
@@ -312,7 +312,7 @@ pub extern "C" fn sysinfo_process_get_cpu_usage(process: CProcess) -> c_float {
 /// Equivalent of `Process.memory`.
 #[no_mangle]
 pub extern "C" fn sysinfo_process_get_memory(process: CProcess) -> size_t {
-    assert!(!process.is_null());
+    debug_assert!(!process.is_null());
     let process = process as *const Process;
     unsafe { (*process).memory() as usize }
 }
@@ -320,7 +320,7 @@ pub extern "C" fn sysinfo_process_get_memory(process: CProcess) -> size_t {
 /// Equivalent of `Process.exe`.
 #[no_mangle]
 pub extern "C" fn sysinfo_process_get_executable_path(process: CProcess) -> RString {
-    assert!(!process.is_null());
+    debug_assert!(!process.is_null());
     let process = process as *const Process;
     unsafe {
         if let Some(p) = (*process).exe().to_str() {
@@ -335,7 +335,7 @@ pub extern "C" fn sysinfo_process_get_executable_path(process: CProcess) -> RStr
 /// Equivalent of `Process.root`.
 #[no_mangle]
 pub extern "C" fn sysinfo_process_get_root_directory(process: CProcess) -> RString {
-    assert!(!process.is_null());
+    debug_assert!(!process.is_null());
     let process = process as *const Process;
     unsafe {
         if let Some(p) = (*process).root().to_str() {
@@ -350,7 +350,7 @@ pub extern "C" fn sysinfo_process_get_root_directory(process: CProcess) -> RStri
 /// Equivalent of `Process.cwd`.
 #[no_mangle]
 pub extern "C" fn sysinfo_process_get_current_directory(process: CProcess) -> RString {
-    assert!(!process.is_null());
+    debug_assert!(!process.is_null());
     let process = process as *const Process;
     unsafe {
         if let Some(p) = (*process).cwd().to_str() {
